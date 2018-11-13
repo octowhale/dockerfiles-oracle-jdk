@@ -14,5 +14,5 @@ COPY --from=downloader /tmp/jdk1.8.0_191 /app/jdk1.8.0_191
 
 # Define commonly used JAVA_HOME variable
 # Add /srv/java and jdk on PATH variable
-ENV JAVA_HOME=/app/jdk1.8.0_191     \
-    PATH=${JAVA_HOME}/bin:${PATH}
+ENV JAVA_HOME=/app/jdk1.8.0_191  \
+    PATH=/app/jdk1.8.0_191/bin:${PATH}
