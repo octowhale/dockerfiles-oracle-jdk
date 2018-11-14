@@ -7,12 +7,12 @@ RUN curl -L -O -H "Cookie: oraclelicense=accept-securebackup-cookie" \
 RUN tar xf jdk-8u191-linux-x64.tar.gz
 
 
-FROM alpine:3.8
+FROM ubuntu:16.04
 
 WORKDIR /app
 COPY --from=downloader /tmp/jdk1.8.0_191 /app/jdk1.8.0_191
 
 # Define commonly used JAVA_HOME variable
 # Add /srv/java and jdk on PATH variable
-ENV JAVA_HOME=/app/jdk1.8.0_191  \
+ENV JAVA_HOME=/app/jdk1.8.0_191   \
     PATH=/app/jdk1.8.0_191/bin:${PATH}
