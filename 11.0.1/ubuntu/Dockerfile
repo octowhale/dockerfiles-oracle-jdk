@@ -1,5 +1,10 @@
-FROM uyinn28/oracle-jdk:warehouse-11.0.1 AS downloader
-RUN cd /data/ && tar xf jdk-11.0.1_linux-x64_bin.tar.gz
+FROM alpine:3.8 AS downloader
+
+WORKDIR /data/
+RUN apk add curl 
+RUN curl -L -O -H "Cookie: oraclelicense=accept-securebackup-cookie" \
+         -k "https://download.oracle.com/otn-pub/java/jdk/11.0.1+13/90cf5d8f270a4347a95050320eef3fb7/jdk-11.0.1_linux-x64_bin.tar.gz" 
+RUN tar xf jdk-11.0.1_linux-x64_bin.tar.gz
 
 FROM ubuntu:16.04
 COPY --from=downloader /data/jdk-11.0.1 /usr/local/jdk-11.0.1
