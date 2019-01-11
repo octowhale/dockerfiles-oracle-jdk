@@ -6,7 +6,7 @@ source env.sh
 
 echo "# 11.0.1" > README.md
 # rm -f README.md
-for image in centos:centos7.6 alpine:3.8 ubuntu:16.04 debian:9.6
+for image in centos:7.6.1810 alpine:3.8 ubuntu:16.04 debian:9.6
 do
 {
     # mkdir -p centos
