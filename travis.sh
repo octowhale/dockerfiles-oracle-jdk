@@ -1,4 +1,8 @@
-#!/bin/sh
+#!/bin/bash
+
+cd $(dirname $0)
+
+[ -f env.private ] && source env.private
 
 [ -z ${HUB_USER} ] && exit 1
 [ -z ${HUB_PASSWD} ] && exit 1

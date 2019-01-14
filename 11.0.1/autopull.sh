@@ -1,4 +1,6 @@
-#/bin/sh
+#/bin/bash
+cd $(dirname $0)
+
 docker pull  ${REPO}/oracle-jdk:11.0.1-centos
 docker pull  ${REPO}/oracle-jdk:11.0.1-centos7.6.1810
 

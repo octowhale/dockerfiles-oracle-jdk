@@ -7,9 +7,16 @@ cd $(dirname $0)
 source ../env.sh
 VERSION=$(basename $(pwd))
 
-echo "# 11.0.1" > README.md
-echo "#/bin/sh" > autobuild.sh
-echo "#/bin/sh" > autopull.sh
+echo "# 11.0.1
+" > README.md
+
+echo '#/bin/bash
+cd $(dirname $0)
+' > autobuild.sh
+
+echo '#/bin/bash
+cd $(dirname $0)
+' > autopull.sh
 
 for image in centos:7.6.1810 alpine:3.8 ubuntu:16.04 debian:9.6
 do

@@ -1,4 +1,6 @@
-#/bin/sh
+#/bin/bash
+cd $(dirname $0)
+
 docker build centos/ -t oracle-jdk:11.0.1-centos 
 docker tag   oracle-jdk:11.0.1-centos ${REPO}/oracle-jdk:11.0.1-centos
 docker tag   oracle-jdk:11.0.1-centos ${REPO}/oracle-jdk:11.0.1-centos7.6.1810
