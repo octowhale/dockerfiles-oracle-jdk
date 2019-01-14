@@ -1,11 +1,16 @@
 #!/bin/bash
 #
 
+
+
 cd $(dirname $0)
-source env.sh
+source ../env.sh
+VERSION=$(basename $(pwd))
 
 echo "# 11.0.1" > README.md
-# rm -f README.md
+echo "#/bin/sh" > autobuild.sh
+echo "#/bin/sh" > autopull.sh
+
 for image in centos:7.6.1810 alpine:3.8 ubuntu:16.04 debian:9.6
 do
 {
@@ -38,6 +43,21 @@ ENV JAVA_HOME=/usr/local/jdk   \\
     PATH=\${JAVA_HOME}/bin:\${PATH}
 EOF
 
+    cat >> autobuild.sh <<EOFBUILD
+docker build ${family}/ -t ${IMAGE}:${VERSION}-${family} 
+docker tag   ${IMAGE}:${VERSION}-${family} \${REPO}/${IMAGE}:${VERSION}-${family}
+docker tag   ${IMAGE}:${VERSION}-${family} \${REPO}/${IMAGE}:${VERSION}-${family}${dist#centos}
+docker push  \${REPO}/${IMAGE}:${VERSION}-${family}
+docker push  \${REPO}/${IMAGE}:${VERSION}-${family}${dist#centos}
+
+EOFBUILD
+
+
+    cat >> autopull.sh <<EOFPULL
+docker pull  \${REPO}/${IMAGE}:${VERSION}-${family}
+docker pull  \${REPO}/${IMAGE}:${VERSION}-${family}${dist#centos}
+
+EOFPULL
 
 }
 done

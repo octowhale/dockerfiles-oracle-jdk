@@ -1,0 +1,12 @@
+language: go
+
+services: 
+  - docker
+
+sudo: required
+
+install:
+  - /bin/sh travis.sh build
+script:
+  - /bin/sh travis.sh pull
+
