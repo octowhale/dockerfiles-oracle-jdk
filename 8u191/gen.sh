@@ -12,11 +12,14 @@ echo "# 8u191
 
 echo '#/bin/bash
 cd $(dirname $0)
+set -ev
 ' > autobuild.sh
 
 echo '#/bin/bash
 cd $(dirname $0)
+set -ev
 ' > autopull.sh
+
 
 for image in centos:7.6.1810 ubuntu:16.04 debian:9.6
 do

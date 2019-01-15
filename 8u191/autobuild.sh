@@ -1,5 +1,6 @@
 #/bin/bash
 cd $(dirname $0)
+set -ev
 
 docker build centos/ -t oracle-jdk:8u191-centos 
 docker tag   oracle-jdk:8u191-centos ${REPO}/oracle-jdk:8u191-centos

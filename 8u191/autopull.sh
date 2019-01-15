@@ -1,5 +1,6 @@
 #/bin/bash
 cd $(dirname $0)
+set -ev
 
 docker pull  ${REPO}/oracle-jdk:8u191-centos
 docker pull  ${REPO}/oracle-jdk:8u191-centos7.6.1810

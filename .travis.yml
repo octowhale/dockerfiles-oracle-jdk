@@ -7,6 +7,6 @@ sudo: required
 
 install:
   - /bin/bash travis.sh build
-script:
-  - /bin/bash travis.sh pull
+script: true
+  # - /bin/bash travis.sh pull
 
