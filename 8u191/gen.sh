@@ -28,10 +28,6 @@ do
     family=${image%%:*}
     dist=${image##*:}
     
-    # 生成镜像列表
-    cat >> README.md <<EOFREADME
-+ [\`${VERSION}-${family}\`, \`${VERSION}-${family}${dist#centos}\` (/${VERSION}/${family}/Dockerfile) ](/${VERSION}/${family}/Dockerfile)
-EOFREADME
 
     mkdir -p ${family}
     # centos/11.0.1-centos.Dockerfile
@@ -62,6 +58,11 @@ ENV PATH="\${JAVA_HOME}/bin:\${PATH}"
 
 EOF
 
+    # 生成镜像列表
+    cat >> README.md <<EOFREADME
++ [\`${VERSION}-${family}\`, \`${VERSION}-${family}${dist#centos}\` (/${VERSION}/${family}/Dockerfile) ](${GITHUB_REPO}/${VERSION}/${family}/Dockerfile)
+EOFREADME
+
     cat >> autobuild.sh <<EOFBUILD
 docker build ${family}/ -t ${IMAGE}:${VERSION}-${family} 
 docker tag   ${IMAGE}:${VERSION}-${family} \${REPO}/${IMAGE}:${VERSION}-${family}
@@ -70,7 +71,6 @@ docker push  \${REPO}/${IMAGE}:${VERSION}-${family}
 docker push  \${REPO}/${IMAGE}:${VERSION}-${family}${dist#centos}
 
 EOFBUILD
-
 
     cat >> autopull.sh <<EOFPULL
 docker pull  \${REPO}/${IMAGE}:${VERSION}-${family}

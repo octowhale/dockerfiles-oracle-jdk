@@ -27,11 +27,6 @@ do
     family=${image%%:*}
     dist=${image##*:}
     
-    # 生成镜像列表
-    cat >> README.md <<EOFREADME
-+ [\`${VERSION}-${family}\`, \`${VERSION}-${family}${dist#centos}\` (/${VERSION}/${family}/Dockerfile) ](/${VERSION}/${family}/Dockerfile)
-EOFREADME
-
     mkdir -p ${family}
     # centos/11.0.1-centos.Dockerfile
     cat > ${family}/Dockerfile <<EOF
@@ -64,6 +59,12 @@ RUN ln -s /usr/local/jdk-\${JAVA_VERSION} /usr/local/jdk
 ENV PATH="\${JAVA_HOME}/bin:\${PATH}"
 
 EOF
+
+    # 生成镜像列表
+    cat >> README.md <<EOFREADME
++ [\`${VERSION}-${family}\`, \`${VERSION}-${family}${dist#centos}\` (/${VERSION}/${family}/Dockerfile) ](${GITHUB_REPO}/${VERSION}/${family}/Dockerfile)
+EOFREADME
+
 
     cat >> autobuild.sh <<EOFBUILD
 ## 
