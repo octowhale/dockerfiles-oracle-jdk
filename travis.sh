@@ -10,12 +10,12 @@ cd $(dirname $0)
 docker login -u ${HUB_USER} -p ${HUB_PASSWD}
 
 function build(){
-    # /bin/bash 8u191/autobuild.sh
+    /bin/bash 8u191/autobuild.sh
     /bin/bash 11.0.1/autobuild.sh
 }
 
 function pull(){
-    # /bin/bash 8u191/autobuild.sh
+    /bin/bash 8u191/autobuild.sh
     /bin/bash 11.0.1/autopull.sh
 }
 

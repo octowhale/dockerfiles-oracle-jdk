@@ -7,7 +7,7 @@ cd $(dirname $0)
 source ../env.sh
 VERSION=$(basename $(pwd))
 
-echo "# 11.0.1
+echo "# 8u191
 " > README.md
 
 echo '#/bin/bash
@@ -35,28 +35,27 @@ EOFREADME
     cat > ${family}/Dockerfile <<EOF
 FROM alpine:3.8 AS downloader
 
-
-ENV JAVA_BUILD=11.0.1+13    \
-    JAVA_HASH=90cf5d8f270a4347a95050320eef3fb7  \
-    JAVA_PACKAGE=jdk-11.0.1_linux-x64_bin.tar.gz
+ENV JAVA_BUILD=8u191-b12    \\
+    JAVA_HASH=2787e4a523244c269598db4e85c51e0c  \\
+    JAVA_PACKAGE=jdk-8u191-linux-x64.tar.gz
 
 WORKDIR /data/
-RUN apk add curl 
-RUN curl -L -O -H "Cookie: oraclelicense=accept-securebackup-cookie" \\
-         -k "https://download.oracle.com/otn-pub/java/jdk/${JAVA_BUILD}/${JAVA_HASH}/${JAVA_PACKAGE}" 
-RUN tar xf ${JAVA_PACKAGE}
+RUN apk add curl
+RUN curl -L -O -H "Cookie: oraclelicense=accept-securebackup-cookie"    \\
+         -k "http://download.oracle.com/otn-pub/java/jdk/\${JAVA_BUILD}/\${JAVA_HASH}/\${JAVA_PACKAGE}" 
+RUN tar xf \${JAVA_PACKAGE}
 
-FROM ${image}
+FROM ubuntu:16.04
 
+ENV JAVA_HOME=/usr/local/jdk    \\
+    JAVA_VERSION=1.8.0_191
+
+COPY --from=downloader /data/jdk\${JAVA_VERSION} /usr/local/jdk\${JAVA_VERSION}
+RUN ln -s /usr/local/jdk\${JAVA_VERSION} /usr/local/jdk
 # Define commonly used JAVA_HOME variable
-ENV JAVA_HOME=/usr/local/jdk   \\
-    JAVA_VERSION=${VERSION}
-
-COPY --from=downloader /data/jdk-\${JAVA_VERSION} /usr/local/jdk-\${JAVA_VERSION}
-RUN ln -s /usr/local/jdk-${VERSION} /usr/local/jdk
-
-# Add JAVA_HOME and jdk on PATH variable
+# Add /srv/java and jdk on PATH variable
 ENV PATH="\${JAVA_HOME}/bin:\${PATH}"
+
 
 EOF
 
