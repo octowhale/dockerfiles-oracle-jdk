@@ -12,4 +12,6 @@ RUN ln -s /usr/local/jdk-11.0.1 /usr/local/jdk
 # Define commonly used JAVA_HOME variable
 # Add /srv/java and jdk on PATH variable
 ENV JAVA_HOME=/usr/local/jdk   \
-    PATH=${JAVA_HOME}/bin:${PATH}
+    JAVA_VERSION=11.0.1
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+

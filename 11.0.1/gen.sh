@@ -18,7 +18,7 @@ echo '#/bin/bash
 cd $(dirname $0)
 ' > autopull.sh
 
-for image in centos:7.6.1810 alpine:3.8 ubuntu:16.04 debian:9.6
+for image in centos:7.6.1810 ubuntu:16.04 debian:9.6
 do
 {
     # mkdir -p centos
@@ -47,7 +47,9 @@ RUN ln -s /usr/local/jdk-${VERSION} /usr/local/jdk
 # Define commonly used JAVA_HOME variable
 # Add /srv/java and jdk on PATH variable
 ENV JAVA_HOME=/usr/local/jdk   \\
-    PATH=\${JAVA_HOME}/bin:\${PATH}
+    JAVA_VERSION=${VERSION}
+ENV PATH="\${JAVA_HOME}/bin:\${PATH}"
+
 EOF
 
     cat >> autobuild.sh <<EOFBUILD
