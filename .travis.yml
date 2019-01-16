@@ -6,7 +6,7 @@ services:
 sudo: required
 
 install: true
-  # - /bin/bash travis.sh build
+  - /bin/bash travis.sh build
 script: true
-  # - /bin/bash travis.sh pull
+  - /bin/bash travis.sh pull
 

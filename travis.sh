@@ -15,8 +15,9 @@ function build(){
 }
 
 function pull(){
-    /bin/bash 8u191/autobuild.sh
-    /bin/bash 11.0.1/autopull.sh
+    # /bin/bash 8u191/autobuild.sh
+    # /bin/bash 11.0.1/autopull.sh
+    /bin/bash 8u201/autobuild.sh
 }
 
 case $1 in 
