@@ -15,10 +15,10 @@ function build(){
     /bin/bash 8u201/autobuild.sh
 }
 
-function pull(){
-    # /bin/bash 8u191/autobuild.sh
-    # /bin/bash 11.0.1/autopull.sh
-}
+# function pull(){
+#     # /bin/bash 8u191/autobuild.sh
+#     # /bin/bash 11.0.1/autopull.sh
+# }
 
 case $1 in 
 build) build ;;
